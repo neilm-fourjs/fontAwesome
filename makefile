@@ -1,5 +1,5 @@
 
-export FGLRESOURCEPATH=../etc
+export FGLRESOURCEPATH=../gl_lib/etc
 export FGLIMAGEPATH=../pics:$(FGLDIR)/lib/image2font.txt
 export FGLLDPATH=../gl_lib/bin
 PROG=fontAwesome
