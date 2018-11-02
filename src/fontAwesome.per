@@ -1,0 +1,109 @@
+
+LAYOUT  (STYLE="main2", IMAGE="fab-font-awesome-flag" )
+VBOX
+GRID
+{
+[f][quit]FGLIMAGEPATH:[a001                                   ]
+}
+END -- GRID
+HBOX ( SPLITTER )
+TABLE
+{
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+[i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
+}
+END -- TABLE
+GRID
+{
+[c:clab        ]
+[nlab:img_name                 ]
+[flab:font_name             :ii]
+  [img                     ]
+  [                        ]
+  [                        ]
+  [                        ]
+  [                        ]
+  [                        ]
+  [                        ]
+  [                        ]
+  [                        ]
+  [                        ]
+-----------------------------
+Row:
+ 1[x01               |v01 ]
+ 2[x02               |v02 ]
+ 3[x03               |v03 ]
+ 4[x04               |v04 ]
+ 5[x05               |v05 ]
+ 6[x06               |v06 ]
+ 7[x07               |v07 ]
+ 8[x08               |v08 ]
+ 9[x09               |v09 ]
+10[x10               |v10 ]
+}
+END -- GRID
+END -- HBOX
+END -- VBOX
+
+ATTRIBUTES
+IMAGE f : f IMAGE="fab-font-awesome-flag", STYLE="noborder";
+BUTTON quit : quit;
+a001 = FORMONLY.fglimagepath, SCROLL;
+IMAGE i01 = FORMONLY.a01,TITLE="1", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
+IMAGE i02 = FORMONLY.a02,TITLE="2", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
+IMAGE i03 = FORMONLY.a03,TITLE="3", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
+IMAGE i04 = FORMONLY.a04,TITLE="4", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
+IMAGE i05 = FORMONLY.a05,TITLE="5", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
+IMAGE i06 = FORMONLY.a06,TITLE="6", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
+IMAGE i07 = FORMONLY.a07,TITLE="7", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
+IMAGE i08 = FORMONLY.a08,TITLE="8", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
+IMAGE i09 = FORMONLY.a09,TITLE="9", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
+IMAGE i10 = FORMONLY.a10,TITLE="10", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
+
+LABEL clab : clab, TEXT=%"Current Icon:";
+LABEL nlab : nlab, TEXT=%"Icon Name:";
+LABEL img_name = FORMONLY.img_name, SIZEPOLICY=FIXED, STYLE="em14";
+LABEL flab : flab, TEXT=%"Font File:";
+LABEL font_name = FORMONLY.font_name, SIZEPOLICY=FIXED, STYLE="em14";
+
+BUTTON c : copy, IMAGE="fa-copy";
+
+IMAGE ii = FORMONLY.img2, STYLE="noborder", SIZEPOLICY=DYNAMIC;
+IMAGE img = FORMONLY.img, STRETCH=BOTH, AUTOSCALE, {HEIGHT=150 PIXELS, WIDTH=150 PIXELS,} STYLE="noborder";
+
+LABEL x01 = FORMONLY.i01, SIZEPOLICY=FIXED;
+LABEL x02 = FORMONLY.i02, SIZEPOLICY=FIXED;
+LABEL x03 = FORMONLY.i03, SIZEPOLICY=FIXED;
+LABEL x04 = FORMONLY.i04, SIZEPOLICY=FIXED;
+LABEL x05 = FORMONLY.i05, SIZEPOLICY=FIXED;
+LABEL x06 = FORMONLY.i06, SIZEPOLICY=FIXED;
+LABEL x07 = FORMONLY.i07, SIZEPOLICY=FIXED;
+LABEL x08 = FORMONLY.i08, SIZEPOLICY=FIXED;
+LABEL x09 = FORMONLY.i09, SIZEPOLICY=FIXED;
+LABEL x10 = FORMONLY.i10, SIZEPOLICY=FIXED;
+
+LABEL v01 = FORMONLY.v01, SIZEPOLICY=FIXED;
+LABEL v02 = FORMONLY.v02, SIZEPOLICY=FIXED;
+LABEL v03 = FORMONLY.v03, SIZEPOLICY=FIXED;
+LABEL v04 = FORMONLY.v04, SIZEPOLICY=FIXED;
+LABEL v05 = FORMONLY.v05, SIZEPOLICY=FIXED;
+LABEL v06 = FORMONLY.v06, SIZEPOLICY=FIXED;
+LABEL v07 = FORMONLY.v07, SIZEPOLICY=FIXED;
+LABEL v08 = FORMONLY.v08, SIZEPOLICY=FIXED;
+LABEL v09 = FORMONLY.v09, SIZEPOLICY=FIXED;
+LABEL v10 = FORMONLY.v10, SIZEPOLICY=FIXED;
+
+INSTRUCTIONS
+SCREEN RECORD arr ( FORMONLY.a01 THRU FORMONLY.a10 )
