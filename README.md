@@ -8,8 +8,16 @@ On Linux you can use the makefile to build and run using the fontAwesome.4pw
 
 
 # Notes:
-*IMPORTANT* Make sure you use the --recursive flag when you clone this repo, eg:
-* git clone --recursive git@github.com:neilm-fourjs/fontAwesome.git
+*IMPORTANT* Make sure you use the --recursive flag when you clone this repo, eg: On Linux
+```
+git clone --recursive git@github.com:neilm-fourjs/fontAwesome.git
+cd fontAwesome/
+. /opt/fourjs/gst310/envgenero
+make
+make run
+history
+```
+
 
 The demos also uses the gl_lib repo which was added using:
 * git submodule add https://github.com/neilm-fourjs/gl_lib.git gl_lib
