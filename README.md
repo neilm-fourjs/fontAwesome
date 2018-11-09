@@ -13,9 +13,7 @@ On Linux you can use the makefile to build and run using the fontAwesome.4pw
 git clone --recursive git@github.com:neilm-fourjs/fontAwesome.git
 cd fontAwesome/
 . /opt/fourjs/gst310/envgenero
-make
 make run
-history
 ```
 
 
