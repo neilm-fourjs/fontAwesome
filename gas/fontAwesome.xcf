@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<APPLICATION Parent="defaultgwc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.4js.com/ns/gas/3.10/cfextwa.xsd">
+	<RESOURCE Id="res.path.njm_demo" Source="INTERNAL">$(res.deployment.path)</RESOURCE>
+	<EXECUTION>
+		<ENVIRONMENT_VARIABLE Id="FGLRESOURCEPATH">$(res.path.njm_demo)</ENVIRONMENT_VARIABLE>
+		<ENVIRONMENT_VARIABLE Id="FGLIMAGEPATH">$(res.fgldir)/lib/image2font.txt</ENVIRONMENT_VARIABLE>
+		<ENVIRONMENT_VARIABLE Id="DBDATE">DMY4/</ENVIRONMENT_VARIABLE>
+		<ENVIRONMENT_VARIABLE Id="FJS_GL_DBGLEV">0</ENVIRONMENT_VARIABLE>
+		<ENVIRONMENT_VARIABLE Id="LOGDIR">../logs</ENVIRONMENT_VARIABLE>
+		<ENVIRONMENT_VARIABLE Id="LANG">en_GB.UTF-8</ENVIRONMENT_VARIABLE>
+		<PATH>$(res.path.njm_demo)</PATH>
+		<MODULE>fontAwesome.42r</MODULE>
+		<WEB_COMPONENT_DIRECTORY>$(res.path.njm_demo)/webcomponents</WEB_COMPONENT_DIRECTORY>
+	</EXECUTION>
+</APPLICATION>

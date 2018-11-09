@@ -63,11 +63,24 @@
   </Settings>
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
+  <Group label="Packages" language="Genero">
+    <Package binaryName="fontAwesome" label="fontAwesome" platform="Genero Application Server">
+      <DynamicProperty name="packageId" value="fontAwesome"/>
+      <DynamicProperty name="packageLabel" value="fontAwesome"/>
+      <Directory includedFiles="*.42?" label="bin" sourceDirectory="$(ProjectDir)/bin"/>
+      <Directory label="etc" sourceDirectory="$(ProjectDir)/gl_lib/etc"/>
+      <Directory label="gas" sourceDirectory="$(ProjectDir)/gas"/>
+      <Directory label="libbin" sourceDirectory="$(ProjectDir)/gl_lib/bin"/>
+    </Package>
+  </Group>
   <Group environment="value:FGLRESOURCEPATH=../gl_lib/etc,value:FGLIMAGEPATH=$(FGLDIR)/lib/image2font.txt" label="utils" language="Genero">
     <Application binaryName="fontAwesome" dependencies="14000,1986,-1692104760_875802101" id="18736" label="fontAwesome">
       <File filePath="src/fontAwesome.4gl"/>
       <File filePath="src/fontAwesome.per"/>
     </Application>
+    <Library binaryName="gas" id="808481502" label="gas">
+      <File filePath="gas/fontAwesome.xcf"/>
+    </Library>
     <ExtProject filePath="gl_lib/gl_lib.4pw" id="-1692104760"/>
   </Group>
 </Project>
