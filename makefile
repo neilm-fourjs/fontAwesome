@@ -1,13 +1,18 @@
 
-export FGLRESOURCEPATH=../gl_lib/etc
-export FGLIMAGEPATH=../pics:$(FGLDIR)/lib/image2font.txt
-export FGLLDPATH=../gl_lib/bin
 PROG=fontAwesome
+LIB=gl_lib
 
-all: update bin/$(PROG).42r
+export FGLIMAGEPATH=../pics:$(FGLDIR)/lib/image2font.txt
+export FGLRESOURCEPATH=../$(LIB)/etc
+export FGLLDPATH=../$(LIB)/bin:$(GREDIR)/lib
 
-bin/$(PROG).42r:
+all: bin/$(PROG).42r
+
+bin/$(PROG).42r: $(LIB)/bin/$(LIB).42x
 	gsmake $(PROG).4pw
+
+$(LIB)/bin/$(LIB).42x:
+	cd $(LIB) && gsmake $(LIB).4pw
 
 update:
 	git pull
@@ -15,3 +20,6 @@ update:
 
 run: bin/$(PROG).42r
 	cd bin && fglrun $(PROG).42r
+
+clean:
+	rm bin/* $(LIB)/bin/*	
