@@ -2,7 +2,15 @@
 PROG=fontAwesome
 LIB=gl_lib
 
-export FGLIMAGEPATH=../pics:$(FGLDIR)/lib/image2font.txt
+# Default FGLDIR
+#export FGLIMAGEPATH=../pics:$(FGLDIR)/lib/image2font.txt
+
+# Fontawesome 4.7
+#export FGLIMAGEPATH=../pics:../pics/image2font.txt
+
+# Fontawesome 5
+export FGLIMAGEPATH=../pics:../pics/fa5.txt
+
 export FGLRESOURCEPATH=../$(LIB)/etc
 export FGLLDPATH=../$(LIB)/bin:$(GREDIR)/lib
 
