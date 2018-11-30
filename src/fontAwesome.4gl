@@ -55,7 +55,7 @@ MAIN
 	DEFINE l_ret SMALLINT
 	CALL gl_lib.gl_setInfo(C_VER, NULL, NULL, NULL, PRGDESC, PRGAUTH)
 	CALL gl_lib.gl_init( ARG_VAL(1) ,NULL,TRUE)
-	CALL ui.Interface.setText( gl_lib.gl_progdesc )
+	CALL ui.Interface.setText( gl_progdesc )
 
 	OPEN FORM f FROM "fontAwesome"
 	DISPLAY FORM f
