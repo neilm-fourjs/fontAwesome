@@ -1,11 +1,7 @@
 
 LAYOUT  (STYLE="main2", IMAGE="fab-font-awesome-flag" )
 VBOX
-GRID
-{
-[f][quit]FGLIMAGEPATH:[a001                                   ]
-}
-END -- GRID
+
 HBOX ( SPLITTER )
 TABLE
 {
@@ -27,40 +23,48 @@ TABLE
 END -- TABLE
 GRID
 {
-[c:clab        ]
-[nlab:img_name                 ]
-[flab:font_name             :ii]
-  [img                     ]
-  [                        ]
-  [                        ]
-  [                        ]
-  [                        ]
-  [                        ]
-  [                        ]
-  [                        ]
-  [                        ]
-  [                        ]
------------------------------
-Row:
- 1[x01               |v01 ]
- 2[x02               |v02 ]
- 3[x03               |v03 ]
- 4[x04               |v04 ]
- 5[x05               |v05 ]
- 6[x06               |v06 ]
- 7[x07               |v07 ]
- 8[x08               |v08 ]
- 9[x09               |v09 ]
-10[x10               |v10 ]
+[quit :copy             :about ]
+[flab:font_name             ]
+<G clab                         >
+ [nlab:img_name              ]
+ [ii:img                     ]
+    [                        ]
+    [                        ]
+    [                        ]
+    [                        ]
+    [                        ]
+    [                        ]
+    [                        ]
+    [                        ]
+<                               >
+<G row                          >
+  1[x01               |v01 ]
+  2[x02               |v02 ]
+  3[x03               |v03 ]
+  4[x04               |v04 ]
+  5[x05               |v05 ]
+  6[x06               |v06 ]
+  7[x07               |v07 ]
+  8[x08               |v08 ]
+  9[x09               |v09 ]
+ 10[x10               |v10 ]
 }
 END -- GRID
 END -- HBOX
+GRID
+{
+[a001                                                        ]
+}
+END -- GRID
 END -- VBOX
 
 ATTRIBUTES
-IMAGE f : f IMAGE="fab-font-awesome-flag", STYLE="noborder";
+--IMAGE f : f IMAGE="fab-font-awesome-flag", STYLE="noborder";
 BUTTON quit : quit;
-a001 = FORMONLY.fglimagepath, SCROLL;
+BUTTON copy : copy,TEXT="Copy Current Icon Name", IMAGE="fa-copy";
+BUTTON about : about;
+
+LABEL a001 = FORMONLY.fglimagepath, SIZEPOLICY=DYNAMIC;
 IMAGE i01 = FORMONLY.a01,TITLE="1", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
 IMAGE i02 = FORMONLY.a02,TITLE="2", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
 IMAGE i03 = FORMONLY.a03,TITLE="3", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
@@ -72,17 +76,16 @@ IMAGE i08 = FORMONLY.a08,TITLE="8", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE
 IMAGE i09 = FORMONLY.a09,TITLE="9", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
 IMAGE i10 = FORMONLY.a10,TITLE="10", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
 
-LABEL clab : clab, TEXT=%"Current Icon:";
-LABEL nlab : nlab, TEXT=%"Icon Name:";
+GROUP clab : clab, TEXT=%"Current Icon:";
+LABEL nlab : nlab, TEXT=%"Icon:";
 LABEL img_name = FORMONLY.img_name, SIZEPOLICY=FIXED, STYLE="em14";
 LABEL flab : flab, TEXT=%"Font File:";
 LABEL font_name = FORMONLY.font_name, SIZEPOLICY=FIXED, STYLE="em14";
 
-BUTTON c : copy, IMAGE="fa-copy";
-
 IMAGE ii = FORMONLY.img2, STYLE="noborder", SIZEPOLICY=DYNAMIC;
 IMAGE img = FORMONLY.img, STRETCH=BOTH, AUTOSCALE, {HEIGHT=150 PIXELS, WIDTH=150 PIXELS,} STYLE="noborder";
 
+GROUP row : row, TEXT=%"On This Row:";
 LABEL x01 = FORMONLY.i01, SIZEPOLICY=FIXED;
 LABEL x02 = FORMONLY.i02, SIZEPOLICY=FIXED;
 LABEL x03 = FORMONLY.i03, SIZEPOLICY=FIXED;

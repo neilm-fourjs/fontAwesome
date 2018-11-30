@@ -1,6 +1,7 @@
 
 IMPORT os
 IMPORT FGL gl_lib
+IMPORT FGL gl_about
 &include "genero_lib.inc"
 CONSTANT C_VER="3.1"
 CONSTANT PRGDESC = "Font Awesome Reference"
@@ -60,7 +61,7 @@ MAIN
 	OPEN FORM f FROM "fontAwesome"
 	DISPLAY FORM f
 
-	DISPLAY fgl_getEnv("FGLIMAGEPATH") TO fglimagepath
+	DISPLAY "FGLIMAGEPATH:"||fgl_getEnv("FGLIMAGEPATH") TO fglimagepath
 	CALL load_arr()
 
 	DIALOG
@@ -113,6 +114,7 @@ MAIN
 				DISPLAY BY NAME m_rec3[ arr_curr() ].v10
 
 		END DISPLAY
+		GL_ABOUT
 		ON ACTION quit EXIT DIALOG
 		ON ACTION close EXIT DIALOG
 	END DIALOG
