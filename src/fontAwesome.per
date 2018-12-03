@@ -1,8 +1,13 @@
 
 LAYOUT  (STYLE="main2", IMAGE="fab-font-awesome-flag" )
 VBOX
-
 HBOX ( SPLITTER )
+VBOX
+GRID
+{
+[lfil:l_filter                  :clearfilter]
+}
+END -- GRID
 TABLE
 {
 [i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
@@ -21,6 +26,7 @@ TABLE
 [i01  |i02  |i03  |i04  |i05  |i06  |i07  |i08  |i09  |i10  ]
 }
 END -- TABLE
+END -- VBOX
 GRID
 {
 [quit :copy             :about ]
@@ -61,9 +67,11 @@ END -- VBOX
 ATTRIBUTES
 --IMAGE f : f IMAGE="fab-font-awesome-flag", STYLE="noborder";
 BUTTON quit : quit;
-BUTTON copy : copy,TEXT="Copy Current Icon Name", IMAGE="fa-copy";
+BUTTON copy : copy,TEXT=%"Copy Current Icon Name", IMAGE="fa-copy";
 BUTTON about : about;
-
+LABEL lfil : lfil, TEXT=%"Filter:";
+BUTTONEDIT l_filter = FORMONLY.l_filter, ACTION=applyfilter, IMAGE="fa-filter";
+BUTTON clearfilter : clearfilter,TEXT=%"Clear Filter";
 LABEL a001 = FORMONLY.fglimagepath, SIZEPOLICY=DYNAMIC;
 IMAGE i01 = FORMONLY.a01,TITLE="1", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;
 IMAGE i02 = FORMONLY.a02,TITLE="2", HEIGHT=48 PIXELS, WIDTH=48 PIXELS, AUTOSCALE;

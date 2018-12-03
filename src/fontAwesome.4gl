@@ -14,7 +14,7 @@ TYPE t_rec RECORD
 		val STRING
 	END RECORD
 DEFINE m_rec DYNAMIC ARRAY OF t_rec
-DEFINE m_rec2 DYNAMIC ARRAY OF RECORD
+DEFINE m_rec2 DYNAMIC ARRAY OF RECORD -- images
 	i01 STRING,
 	i02 STRING,
 	i03 STRING,
@@ -26,7 +26,7 @@ DEFINE m_rec2 DYNAMIC ARRAY OF RECORD
 	i09 STRING,
 	i10 STRING
 END RECORD
-DEFINE m_rec3 DYNAMIC ARRAY OF RECORD
+DEFINE m_rec3 DYNAMIC ARRAY OF RECORD -- icon name
 	v01 STRING,
 	v02 STRING,
 	v03 STRING,
@@ -38,7 +38,7 @@ DEFINE m_rec3 DYNAMIC ARRAY OF RECORD
 	v09 STRING,
 	v10 STRING
 	END RECORD
-DEFINE m_rec4 DYNAMIC ARRAY OF RECORD
+DEFINE m_rec4 DYNAMIC ARRAY OF RECORD -- Fontname
 	f01 STRING,
 	f02 STRING,
 	f03 STRING,
@@ -54,6 +54,7 @@ DEFINE m_rec4 DYNAMIC ARRAY OF RECORD
 	DEFINE m_img STRING
 MAIN
 	DEFINE l_ret SMALLINT
+	DEFINE l_filter STRING
 	CALL gl_lib.gl_setInfo(C_VER, NULL, NULL, NULL, PRGDESC, PRGAUTH)
 	CALL gl_lib.gl_init( ARG_VAL(1) ,NULL,TRUE)
 	CALL ui.Interface.setText( gl_progdesc )
@@ -64,7 +65,11 @@ MAIN
 	DISPLAY "FGLIMAGEPATH:"||fgl_getEnv("FGLIMAGEPATH") TO fglimagepath
 	CALL load_arr()
 
-	DIALOG
+	DIALOG ATTRIBUTE(UNBUFFERED)
+		INPUT BY NAME l_filter
+			ON ACTION applyfilter ATTRIBUTES(ACCELERATOR='RETURN')
+				CALL  load_arr3( l_filter )
+		END INPUT
 		DISPLAY ARRAY m_rec2 TO arr.* ATTRIBUTES(FOCUSONFIELD)
 			ON ACTION copy CALL ui.Interface.frontCall("standard","cbSet",m_img, l_ret)
 
@@ -114,6 +119,10 @@ MAIN
 				DISPLAY BY NAME m_rec3[ arr_curr() ].v10
 
 		END DISPLAY
+		ON ACTION clearfilter
+			LET l_filter = NULL
+			CALL  load_arr3( l_filter )
+			NEXT FIELD l_filter
 		GL_ABOUT
 		ON ACTION quit EXIT DIALOG
 		ON ACTION close EXIT DIALOG
@@ -166,40 +175,61 @@ FUNCTION load_arr2(l_file)
 		--	DISPLAY "file:",l_file," fld1:",l_rec.fld1," fld2:",l_rec.fld2
 		END IF
 	END WHILE
-	FOR x = 1 TO m_rec.getLength() STEP 10
+	CALL c.close()
+	CALL load_arr3( NULL )
+END FUNCTION
+--------------------------------------------------------------------------------
+-- Set the arrays for displaying
+FUNCTION load_arr3(l_filter STRING)
+	DEFINE x SMALLINT
+	DEFINE l_rec DYNAMIC ARRAY OF t_rec
+	CALL m_rec2.clear()
+	CALL m_rec3.clear()
+	CALL m_rec4.clear()
+	CALL  m_rec.copyTo( l_rec )
+	IF l_filter IS NOT NULL THEN
+		FOR x =  l_rec.getLength() TO 1 STEP -1
+			DISPLAY "Img:",l_rec[x].img
+			IF NOT l_rec[x].img MATCHES l_filter THEN
+				CALL l_rec.deleteElement(x)
+			END IF
+		END FOR
+	END IF
+	MESSAGE SFMT("Loading array using filter: %1", l_filter)
+	FOR x = 1 TO l_rec.getLength() STEP 10
 		CALL m_rec2.appendElement()
 		CALL m_rec3.appendElement()
 		CALL m_rec4.appendElement()
-		LET m_rec2[ m_rec2.getLength() ].i01 = m_rec[x].img
-		LET m_rec2[ m_rec2.getLength() ].i02 = m_rec[x+1].img
-		LET m_rec2[ m_rec2.getLength() ].i03 = m_rec[x+2].img
-		LET m_rec2[ m_rec2.getLength() ].i04 = m_rec[x+3].img
-		LET m_rec2[ m_rec2.getLength() ].i05 = m_rec[x+4].img
-		LET m_rec2[ m_rec2.getLength() ].i06 = m_rec[x+5].img
-		LET m_rec2[ m_rec2.getLength() ].i07 = m_rec[x+6].img
-		LET m_rec2[ m_rec2.getLength() ].i08 = m_rec[x+7].img
-		LET m_rec2[ m_rec2.getLength() ].i09 = m_rec[x+8].img
-		LET m_rec2[ m_rec2.getLength() ].i10 = m_rec[x+9].img
-		LET m_rec3[ m_rec3.getLength() ].v01 = m_rec[x].val
-		LET m_rec3[ m_rec3.getLength() ].v02 = m_rec[x+1].val
-		LET m_rec3[ m_rec3.getLength() ].v03 = m_rec[x+2].val
-		LET m_rec3[ m_rec3.getLength() ].v04 = m_rec[x+3].val
-		LET m_rec3[ m_rec3.getLength() ].v05 = m_rec[x+4].val
-		LET m_rec3[ m_rec3.getLength() ].v06 = m_rec[x+5].val
-		LET m_rec3[ m_rec3.getLength() ].v07 = m_rec[x+6].val
-		LET m_rec3[ m_rec3.getLength() ].v08 = m_rec[x+7].val
-		LET m_rec3[ m_rec3.getLength() ].v09 = m_rec[x+8].val
-		LET m_rec3[ m_rec3.getLength() ].v10 = m_rec[x+9].val
-		LET m_rec4[ m_rec4.getLength() ].f01 = m_rec[x].font
-		LET m_rec4[ m_rec4.getLength() ].f02 = m_rec[x+1].font
-		LET m_rec4[ m_rec4.getLength() ].f03 = m_rec[x+2].font
-		LET m_rec4[ m_rec4.getLength() ].f04 = m_rec[x+3].font
-		LET m_rec4[ m_rec4.getLength() ].f05 = m_rec[x+4].font
-		LET m_rec4[ m_rec4.getLength() ].f06 = m_rec[x+5].font
-		LET m_rec4[ m_rec4.getLength() ].f07 = m_rec[x+6].font
-		LET m_rec4[ m_rec4.getLength() ].f08 = m_rec[x+7].font
-		LET m_rec4[ m_rec4.getLength() ].f09 = m_rec[x+8].font
-		LET m_rec4[ m_rec4.getLength() ].f10 = m_rec[x+9].font
+		LET m_rec2[ m_rec2.getLength() ].i01 = l_rec[x].img
+		LET m_rec2[ m_rec2.getLength() ].i02 = l_rec[x+1].img
+		LET m_rec2[ m_rec2.getLength() ].i03 = l_rec[x+2].img
+		LET m_rec2[ m_rec2.getLength() ].i04 = l_rec[x+3].img
+		LET m_rec2[ m_rec2.getLength() ].i05 = l_rec[x+4].img
+		LET m_rec2[ m_rec2.getLength() ].i06 = l_rec[x+5].img
+		LET m_rec2[ m_rec2.getLength() ].i07 = l_rec[x+6].img
+		LET m_rec2[ m_rec2.getLength() ].i08 = l_rec[x+7].img
+		LET m_rec2[ m_rec2.getLength() ].i09 = l_rec[x+8].img
+		LET m_rec2[ m_rec2.getLength() ].i10 = l_rec[x+9].img
+		LET m_rec3[ m_rec3.getLength() ].v01 = l_rec[x].val
+		LET m_rec3[ m_rec3.getLength() ].v02 = l_rec[x+1].val
+		LET m_rec3[ m_rec3.getLength() ].v03 = l_rec[x+2].val
+		LET m_rec3[ m_rec3.getLength() ].v04 = l_rec[x+3].val
+		LET m_rec3[ m_rec3.getLength() ].v05 = l_rec[x+4].val
+		LET m_rec3[ m_rec3.getLength() ].v06 = l_rec[x+5].val
+		LET m_rec3[ m_rec3.getLength() ].v07 = l_rec[x+6].val
+		LET m_rec3[ m_rec3.getLength() ].v08 = l_rec[x+7].val
+		LET m_rec3[ m_rec3.getLength() ].v09 = l_rec[x+8].val
+		LET m_rec3[ m_rec3.getLength() ].v10 = l_rec[x+9].val
+		LET m_rec4[ m_rec4.getLength() ].f01 = l_rec[x].font
+		LET m_rec4[ m_rec4.getLength() ].f02 = l_rec[x+1].font
+		LET m_rec4[ m_rec4.getLength() ].f03 = l_rec[x+2].font
+		LET m_rec4[ m_rec4.getLength() ].f04 = l_rec[x+3].font
+		LET m_rec4[ m_rec4.getLength() ].f05 = l_rec[x+4].font
+		LET m_rec4[ m_rec4.getLength() ].f06 = l_rec[x+5].font
+		LET m_rec4[ m_rec4.getLength() ].f07 = l_rec[x+6].font
+		LET m_rec4[ m_rec4.getLength() ].f08 = l_rec[x+7].font
+		LET m_rec4[ m_rec4.getLength() ].f09 = l_rec[x+8].font
+		LET m_rec4[ m_rec4.getLength() ].f10 = l_rec[x+9].font
 	END FOR
-	CALL c.close()
+
 END FUNCTION
