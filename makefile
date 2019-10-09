@@ -2,7 +2,7 @@
 PROG=fontAwesome
 LIB=../g2_lib
 BASE=$(PWD)
-TRG=../njm_app/bin
+TRG=../njm_app_bin
 
 # Default FGLDIR
 #export FGLIMAGEPATH=../pics:$(FGLDIR)/lib/image2font.txt
