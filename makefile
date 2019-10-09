@@ -1,6 +1,8 @@
 
 PROG=fontAwesome
 LIB=../g2_lib
+BASE=$(PWD)
+TRG=../njm_app/bin
 
 # Default FGLDIR
 #export FGLIMAGEPATH=../pics:$(FGLDIR)/lib/image2font.txt
@@ -9,21 +11,20 @@ LIB=../g2_lib
 #export FGLIMAGEPATH=../pics:../pics/image2font.txt
 
 # Fontawesome 5
-export FGLIMAGEPATH=../etc:../etc/fa5.txt
+export FGLIMAGEPATH=$(BASE)/etc:$(BASE)/etc/fa5.txt
+export FGLRESOURCEPATH=$(BASE)/etc
+export FGLLDPATH=$(TRG):$(GREDIR)/lib
 
-export FGLRESOURCEPATH=../etc
-export FGLLDPATH=../$(LIB)/bin:$(GREDIR)/lib
+all: $(TRG)/$(PROG).42r
 
-all: bin/$(PROG).42r
-
-bin/$(PROG).42r: src/*.4gl src/*.per
+$(TRG)/$(PROG).42r: src/*.4gl src/*.per
 	gsmake $(PROG).4pw
 
 update:
 	git pull
 
-run: bin/$(PROG).42r
-	cd bin && fglrun $(PROG).42r
+run: $(TRG)/$(PROG).42r
+	cd $(TRG) && fglrun $(PROG).42r
 
 clean:
-	rm bin/* $(LIB)/bin/*	
+	gsmake -c $(PROG).4pw
