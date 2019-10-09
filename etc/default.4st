@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="ANSI_X3.4-1968"?>
+
+<StyleList>
+
+
+	<Style name="Group::title">
+		<StyleAttribute name="fontSize" value="1.2em" />
+		<StyleAttribute name="fontWeight" value="bold" />
+		<StyleAttribute name="textColor" value="blue" />
+	</Style>
+
+	<Style name=".hidden">
+		<StyleAttribute name="border" value="none" />
+		<StyleAttribute name="fontSize" value="1pt" />
+	</Style>
+
+	<Style name=".heading">
+		<StyleAttribute name="fontSize" value="1.6em" />
+		<StyleAttribute name="fontWeight" value="bold" />
+		<StyleAttribute name="position" value="center" />
+	</Style>
+	<Style name=".hugh">
+		<StyleAttribute name="fontSize" value="24pt" />
+	</Style>
+	<Style name=".em16">
+		<StyleAttribute name="fontSize" value="1.6em" />
+	</Style>
+	<Style name=".em14">
+		<StyleAttribute name="fontSize" value="1.4em" />
+	</Style>
+	<Style name=".em12">
+		<StyleAttribute name="fontSize" value="1.2em" />
+	</Style>
+	<Style name=".bg_white">
+		<StyleAttribute name="backgroundColor" value="white" />
+	</Style>
+	<Style name=".bold">
+		<StyleAttribute name="fontWeight" value="bold" />
+	</Style>
+	<Style name=".default">
+		<StyleAttribute name="forceDefaultSettings" value="yes" />
+	</Style>
+	<Style name=".center">
+		<StyleAttribute name="position" value="center" />
+	</Style>
+	<Style name=".noborder">
+		<StyleAttribute name="border" value="none" />
+	</Style>
+
+	<Style name="Table">
+		<StyleAttribute name="headerAlignment" value="auto" />
+	</Style>
+
+	<Style name="Table.noheading">
+		<StyleAttribute name="headerHidden" value="yes" />
+	</Style>
+	<Style name="Table.menu">
+		<StyleAttribute name="headerHidden" value="yes" />
+		<StyleAttribute name="highlightCurrentRow" value="no" />
+		<StyleAttribute name="highlightCurrentCell" value="no"/>
+	</Style>
+  <Style name="Table.listview">
+    <StyleAttribute name="tableType" value="listView" />
+  </Style>
+
+	<Style name="Table.wizard:focus">
+		<StyleAttribute name="backgroundColor" value="White" />
+	</Style>
+	<Style name="Table.wizard:active">
+		<StyleAttribute name="backgroundColor" value="Azure" />
+	</Style>
+
+	<Style name=".Arial">
+		<StyleAttribute name="fontFamily" value=" Arial" />
+	</Style>
+
+	<Style name="Label">
+		<StyleAttribute name="textColor" value="darkblue" />
+		<StyleAttribute name="fontWeight" value="bold" />
+	</Style>
+	<Style name=".test:active">
+		<StyleAttribute name="backgroundColor" value="Azure" />
+	</Style>
+	<Style name=".test:active:focus">
+		<StyleAttribute name="backgroundColor" value="GhostWhite" />
+	</Style>
+	<Style name=":inactive">
+		<StyleAttribute name="textColor" value="darkred" />
+	</Style>
+
+	<Style name="Table.disparr">
+		<StyleAttribute name="summaryLineAlwaysAtBottom" value="no" />
+	</Style>
+  <Style name="Table.disparr:odd">
+    <StyleAttribute name="backgroundColor" value="#D5FFD5"/>
+  </Style>
+
+	<Style name="Window">
+		<StyleAttribute name="windowType" value="normal" />
+	</Style>
+	<Style name="Window.blue">
+		<StyleAttribute name="defaultTTFColor" value="darkblue" />
+	</Style>
+	<Style name="Window.main">
+		<StyleAttribute name="windowType" value="normal" />
+		<StyleAttribute name="startMenuPosition" value="tree" />
+		<StyleAttribute name="tabbedContainer" value="yes" />
+		<StyleAttribute name="tabbedContainerCloseMethod" value="both" />
+	</Style>
+	<Style name="Window.centered">
+		<StyleAttribute name="windowType" value="normal" />
+		<StyleAttribute name="actionPanelPosition" value="none" />
+		<StyleAttribute name="ringMenuPosition" value="none" />
+		<StyleAttribute name="sizable" value="yes" />
+		<StyleAttribute name="position" value="center" />
+	</Style>
+	<Style name="Window.main2">
+		<StyleAttribute name="windowType" value="normal" />
+		<StyleAttribute name="actionPanelPosition" value="none" />
+		<StyleAttribute name="ringMenuPosition" value="none" />
+	</Style>
+	<Style name="Window.dialog">
+		<StyleAttribute name="windowType" value="modal" />
+		<StyleAttribute name="sizable" value="no" />
+		<StyleAttribute name="position" value="center" />
+		<StyleAttribute name="actionPanelPosition" value="bottom" />
+		<StyleAttribute name="ringMenuPosition" value="bottom" />
+		<StyleAttribute name="toolBarPosition" value="none" />
+		<StyleAttribute name="statusBarType" value="none" />
+		<StyleAttribute name="errorMessagePosition" value="popup" />
+	</Style>
+	<Style name="Window.dialog2">
+		<StyleAttribute name="windowType" value="modal" />
+		<StyleAttribute name="sizable" value="no" />
+		<StyleAttribute name="position" value="center" />
+		<StyleAttribute name="actionPanelPosition" value="none" />
+		<StyleAttribute name="ringMenuPosition" value="none" />
+		<StyleAttribute name="toolBarPosition" value="none" />
+		<StyleAttribute name="statusBarType" value="none" />
+		<StyleAttribute name="errorMessagePosition" value="popup" />
+	</Style>
+	<Style name="Window.dialog3">
+		<StyleAttribute name="windowType" value="modal" />
+		<StyleAttribute name="sizable" value="yes" />
+		<StyleAttribute name="toolBarPosition" value="none" />
+		<StyleAttribute name="actionPanelPosition" value="none" />
+		<StyleAttribute name="ringMenuPosition" value="none" />
+		<StyleAttribute name="statusBarType" value="none" />
+		<StyleAttribute name="errorMessagePosition" value="popup" />
+	</Style>
+	<Style name="Window.dialog4">
+		<StyleAttribute name="windowType" value="modal" />
+		<StyleAttribute name="sizable" value="yes" />
+		<StyleAttribute name="actionPanelPosition" value="bottom" />
+		<StyleAttribute name="ringMenuPosition" value="none" />
+		<StyleAttribute name="statusBarType" value="none" />
+		<StyleAttribute name="errorMessagePosition" value="popup" />
+	</Style>
+	<Style name="Window.naked">
+		<StyleAttribute name="windowType" value="modal" />
+		<StyleAttribute name="border" value="tool" />
+		<StyleAttribute name="actionPanelPosition" value="none" />
+		<StyleAttribute name="ringMenuPosition" value="none" />
+		<StyleAttribute name="toolBarPosition" value="none" />
+		<StyleAttribute name="statusBarType" value="none" />
+	</Style>
+	<Style name="Window.viewer">
+		<StyleAttribute name="windowType" value="modal" />
+		<StyleAttribute name="windowSystemMenu" value="yes" />
+		<StyleAttribute name="windowOptionMinimize" value="no" />
+		<StyleAttribute name="windowOptionMaximize" value="no" />
+		<StyleAttribute name="sizable" value="yes" />
+		<StyleAttribute name="actionPanelPosition" value="none" />
+		<StyleAttribute name="ringMenuPosition" value="none" />
+		<StyleAttribute name="toolBarPosition" value="none" />
+		<StyleAttribute name="statusBarType" value="none" />
+	</Style>
+	<!--Style name="UserInterface">
+		<StyleAttribute name="browserMultiPage" value="no" />
+	</Style-->
+</StyleList>

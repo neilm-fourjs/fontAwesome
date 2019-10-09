@@ -1,3 +1,0 @@
-[submodule "gl_lib"]
-	path = gl_lib
-	url = https://github.com/neilm-fourjs/gl_lib.git
