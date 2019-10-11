@@ -14,6 +14,7 @@ TRG=../njm_app_bin
 export FGLIMAGEPATH=$(BASE)/etc:$(BASE)/etc/fa5.txt
 export FGLRESOURCEPATH=$(BASE)/etc
 export FGLLDPATH=$(TRG):$(GREDIR)/lib
+export FJS_GL_DBGLEV=1
 
 all: $(TRG)/$(PROG).42r
 
