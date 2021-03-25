@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="ANSI_X3.4-1968"?>
 
 <StyleList>
-
+  <!-- Style name="*">
+     <StyleAttribute name="defaultTTFColor" value="buttonText" />
+  </Style-->
 
 	<Style name="Group::title">
 		<StyleAttribute name="fontSize" value="1.2em" />
 		<StyleAttribute name="fontWeight" value="bold" />
-		<StyleAttribute name="textColor" value="blue" />
+		<!--StyleAttribute name="textColor" value="blue" /-->
 	</Style>
 
 	<Style name=".hidden">
@@ -75,7 +77,7 @@
 	</Style>
 
 	<Style name="Label">
-		<StyleAttribute name="textColor" value="darkblue" />
+		<!--StyleAttribute name="textColor" value="darkblue" /-->
 		<StyleAttribute name="fontWeight" value="bold" />
 	</Style>
 	<Style name=".test:active">
@@ -84,9 +86,9 @@
 	<Style name=".test:active:focus">
 		<StyleAttribute name="backgroundColor" value="GhostWhite" />
 	</Style>
-	<Style name=":inactive">
+	<!-->Style name=":inactive">
 		<StyleAttribute name="textColor" value="darkred" />
-	</Style>
+	</Style-->
 
 	<Style name="Table.disparr">
 		<StyleAttribute name="summaryLineAlwaysAtBottom" value="no" />
