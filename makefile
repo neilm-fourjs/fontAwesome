@@ -2,6 +2,12 @@
 PROJ=fontAwesome
 BASE=$(PWD)
 
+# fontAwesome 4.7
+#export FGLIMAGEPATH=$(BASE)/etc:$(FGLDIR)/etc/image2font.txt
+
+# fontAwesome 5
+#export FGLIMAGEPATH=$(BASE)/etc:$(BASE)/etc/fa5.txt
+
 # fontAwesome + Material Design
 export FGLIMAGEPATH=$(BASE)/etc:$(BASE)/etc/image2font2.txt
 
@@ -27,4 +33,10 @@ update:
 
 run: $(BIN)/$(PROJ).42m
 	cd $(BIN) && fglrun $(PROJ)
+
+runfa5: $(BIN)/$(PROJ).42m
+	export FGLIMAGEPATH=$(BASE)/etc:$(BASE)/etc/fa5.txt && cd $(BIN) && fglrun $(PROJ)
+
+rundef: $(BIN)/$(PROJ).42m
+	export FGLIMAGEPATH=$(BASE)/etc:$(BASE)/etc/image2font.txt && cd $(BIN) && fglrun $(PROJ)
 
