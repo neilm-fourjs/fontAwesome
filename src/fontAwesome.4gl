@@ -3,6 +3,7 @@
 
 IMPORT os
 IMPORT FGL g2_lib.*
+IMPORT FGL fgldialog
 
 CONSTANT C_PRGDESC = "FontAwesome Viewer"
 CONSTANT C_PRGAUTH = "Neil J.Martin"
@@ -43,9 +44,11 @@ MAIN
 
   OPEN FORM f FROM "fontAwesome"
   DISPLAY FORM f
-	LET m_imgPath = fgl_getEnv("FGLIMAGEPATH")
+	LET m_imgPath = fgl_getenv("FGLIMAGEPATH")
   DISPLAY "FGLIMAGEPATH:" || m_imgPath TO fglimagepath
-  CALL load_arr()
+  IF NOT load_arr() THEN
+		EXIT PROGRAM
+	END IF
 
   DIALOG ATTRIBUTE(UNBUFFERED)
     INPUT BY NAME l_filter
@@ -53,9 +56,6 @@ MAIN
         CALL load_arr3(l_filter)
     END INPUT
     DISPLAY ARRAY m_imgs TO arr.* ATTRIBUTES(FOCUSONFIELD)
-      ON ACTION copy
-        CALL ui.Interface.frontCall("standard", "cbSet", m_img, l_ret)
-
       BEFORE FIELD a01
         CALL disp_img(m_imgs[arr_curr()].s01, m_icon[arr_curr()].s01, m_fntn[arr_curr()].s01)
       BEFORE FIELD a02
@@ -81,10 +81,13 @@ MAIN
 				CALL disp_row(DIALOG)
 
     END DISPLAY
+
 		BEFORE DIALOG
 			CALL disp_row(DIALOG)
       CALL disp_img(m_imgs[arr_curr()].s01, m_icon[arr_curr()].s01, m_fntn[arr_curr()].s01)
 
+     ON ACTION copy
+       CALL ui.Interface.frontCall("standard", "cbSet", m_img, l_ret)
     ON ACTION clearfilter
       LET l_filter = NULL
       CALL load_arr3(l_filter)
@@ -133,19 +136,20 @@ FUNCTION disp_row(d ui.Dialog) RETURNS ()
 	DISPLAY m_icon[x].s10 TO v10
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION load_arr()
+FUNCTION load_arr() RETURNS BOOLEAN
   DEFINE l_file STRING
   DEFINE l_st base.StringTokenizer
   LET l_st = base.StringTokenizer.create(m_imgPath, os.Path.pathSeparator())
   WHILE l_st.hasMoreTokens()
     LET l_file = l_st.nextToken()
     IF l_file MATCHES "*.txt" THEN
-      CALL load_arr2(l_file)
+      IF NOT load_arr2(l_file) THEN RETURN FALSE END IF
     END IF
   END WHILE
+	RETURN TRUE
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION load_arr2(l_file)
+FUNCTION load_arr2(l_file) RETURNS BOOLEAN
   DEFINE l_file STRING
   DEFINE c base.Channel
   DEFINE l_rec RECORD
@@ -155,8 +159,12 @@ FUNCTION load_arr2(l_file)
   DEFINE x SMALLINT
   DISPLAY "Adding:", l_file
   LET c = base.Channel.create()
---	CALL c.openFile( fgl_getEnv("FGLDIR")||"/lib/image2font.txt","r")
-  CALL c.openFile(l_file, "r")
+	TRY
+  	CALL c.openFile(l_file, "r")
+	CATCH
+		CALL fgldialog.fgl_winMessage("Error",SFMT("Failed to open %1", l_file),"exclamation")
+		RETURN FALSE
+	END TRY
   CALL c.setDelimiter("=")
   CALL m_rec.clear()
   WHILE NOT c.isEof()
@@ -175,11 +183,12 @@ FUNCTION load_arr2(l_file)
   END WHILE
   CALL c.close()
   CALL load_arr3(NULL)
+	RETURN TRUE
 END FUNCTION
 --------------------------------------------------------------------------------
 -- Set the arrays for displaying
-FUNCTION load_arr3(l_filter STRING)
-  DEFINE x SMALLINT
+FUNCTION load_arr3(l_filter STRING) RETURNS ()
+  DEFINE x, i SMALLINT
   DEFINE l_rec DYNAMIC ARRAY OF t_rec
   CALL m_imgs.clear()
   CALL m_icon.clear()
@@ -198,35 +207,36 @@ FUNCTION load_arr3(l_filter STRING)
     CALL m_imgs.appendElement()
     CALL m_icon.appendElement()
     CALL m_fntn.appendElement()
-    LET m_imgs[m_imgs.getLength()].s01 = l_rec[x].img
-    LET m_imgs[m_imgs.getLength()].s02 = l_rec[x + 1].img
-    LET m_imgs[m_imgs.getLength()].s03 = l_rec[x + 2].img
-    LET m_imgs[m_imgs.getLength()].s04 = l_rec[x + 3].img
-    LET m_imgs[m_imgs.getLength()].s05 = l_rec[x + 4].img
-    LET m_imgs[m_imgs.getLength()].s06 = l_rec[x + 5].img
-    LET m_imgs[m_imgs.getLength()].s07 = l_rec[x + 6].img
-    LET m_imgs[m_imgs.getLength()].s08 = l_rec[x + 7].img
-    LET m_imgs[m_imgs.getLength()].s09 = l_rec[x + 8].img
-    LET m_imgs[m_imgs.getLength()].s10 = l_rec[x + 9].img
-    LET m_icon[m_icon.getLength()].s01 = l_rec[x].val
-    LET m_icon[m_icon.getLength()].s02 = l_rec[x + 1].val
-    LET m_icon[m_icon.getLength()].s03 = l_rec[x + 2].val
-    LET m_icon[m_icon.getLength()].s04 = l_rec[x + 3].val
-    LET m_icon[m_icon.getLength()].s05 = l_rec[x + 4].val
-    LET m_icon[m_icon.getLength()].s06 = l_rec[x + 5].val
-    LET m_icon[m_icon.getLength()].s07 = l_rec[x + 6].val
-    LET m_icon[m_icon.getLength()].s08 = l_rec[x + 7].val
-    LET m_icon[m_icon.getLength()].s09 = l_rec[x + 8].val
-    LET m_icon[m_icon.getLength()].s10 = l_rec[x + 9].val
-    LET m_fntn[m_fntn.getLength()].s01 = l_rec[x].font
-    LET m_fntn[m_fntn.getLength()].s02 = l_rec[x + 1].font
-    LET m_fntn[m_fntn.getLength()].s03 = l_rec[x + 2].font
-    LET m_fntn[m_fntn.getLength()].s04 = l_rec[x + 3].font
-    LET m_fntn[m_fntn.getLength()].s05 = l_rec[x + 4].font
-    LET m_fntn[m_fntn.getLength()].s06 = l_rec[x + 5].font
-    LET m_fntn[m_fntn.getLength()].s07 = l_rec[x + 6].font
-    LET m_fntn[m_fntn.getLength()].s08 = l_rec[x + 7].font
-    LET m_fntn[m_fntn.getLength()].s09 = l_rec[x + 8].font
-    LET m_fntn[m_fntn.getLength()].s10 = l_rec[x + 9].font
+		LET i = m_imgs.getLength()
+    LET m_imgs[i].s01 = l_rec[x].img
+    LET m_imgs[i].s02 = l_rec[x + 1].img
+    LET m_imgs[i].s03 = l_rec[x + 2].img
+    LET m_imgs[i].s04 = l_rec[x + 3].img
+    LET m_imgs[i].s05 = l_rec[x + 4].img
+    LET m_imgs[i].s06 = l_rec[x + 5].img
+    LET m_imgs[i].s07 = l_rec[x + 6].img
+    LET m_imgs[i].s08 = l_rec[x + 7].img
+    LET m_imgs[i].s09 = l_rec[x + 8].img
+    LET m_imgs[i].s10 = l_rec[x + 9].img
+    LET m_icon[i].s01 = l_rec[x].val
+    LET m_icon[i].s02 = l_rec[x + 1].val
+    LET m_icon[i].s03 = l_rec[x + 2].val
+    LET m_icon[i].s04 = l_rec[x + 3].val
+    LET m_icon[i].s05 = l_rec[x + 4].val
+    LET m_icon[i].s06 = l_rec[x + 5].val
+    LET m_icon[i].s07 = l_rec[x + 6].val
+    LET m_icon[i].s08 = l_rec[x + 7].val
+    LET m_icon[i].s09 = l_rec[x + 8].val
+    LET m_icon[i].s10 = l_rec[x + 9].val
+    LET m_fntn[i].s01 = l_rec[x].font
+    LET m_fntn[i].s02 = l_rec[x + 1].font
+    LET m_fntn[i].s03 = l_rec[x + 2].font
+    LET m_fntn[i].s04 = l_rec[x + 3].font
+    LET m_fntn[i].s05 = l_rec[x + 4].font
+    LET m_fntn[i].s06 = l_rec[x + 5].font
+    LET m_fntn[i].s07 = l_rec[x + 6].font
+    LET m_fntn[i].s08 = l_rec[x + 7].font
+    LET m_fntn[i].s09 = l_rec[x + 8].font
+    LET m_fntn[i].s10 = l_rec[x + 9].font
   END FOR
 END FUNCTION
