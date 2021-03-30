@@ -15,44 +15,23 @@ TYPE t_rec RECORD
   font STRING,
   val STRING
 END RECORD
+TYPE t_s10 RECORD
+  s01 STRING,
+  s02 STRING,
+  s03 STRING,
+  s04 STRING,
+  s05 STRING,
+  s06 STRING,
+  s07 STRING,
+  s08 STRING,
+  s09 STRING,
+  s10 STRING
+END RECORD
 DEFINE m_rec DYNAMIC ARRAY OF t_rec
-DEFINE m_rec2 DYNAMIC ARRAY OF RECORD -- images
-  i01 STRING,
-  i02 STRING,
-  i03 STRING,
-  i04 STRING,
-  i05 STRING,
-  i06 STRING,
-  i07 STRING,
-  i08 STRING,
-  i09 STRING,
-  i10 STRING
-END RECORD
-DEFINE m_rec3 DYNAMIC ARRAY OF RECORD -- icon name
-  v01 STRING,
-  v02 STRING,
-  v03 STRING,
-  v04 STRING,
-  v05 STRING,
-  v06 STRING,
-  v07 STRING,
-  v08 STRING,
-  v09 STRING,
-  v10 STRING
-END RECORD
-DEFINE m_rec4 DYNAMIC ARRAY OF RECORD -- Fontname
-  f01 STRING,
-  f02 STRING,
-  f03 STRING,
-  f04 STRING,
-  f05 STRING,
-  f06 STRING,
-  f07 STRING,
-  f08 STRING,
-  f09 STRING,
-  f10 STRING
-END RECORD
-
+DEFINE m_imgs DYNAMIC ARRAY OF t_s10 	-- images
+DEFINE m_icon DYNAMIC ARRAY OF t_s10  -- icon name
+DEFINE m_fntn DYNAMIC ARRAY OF t_s10 	-- font name
+DEFINE m_imgPath STRING
 DEFINE m_img STRING
 MAIN
   DEFINE l_ret SMALLINT
@@ -60,12 +39,12 @@ MAIN
   DEFINE l_appInfo g2_appInfo.appInfo
 
   CALL l_appInfo.progInfo(C_PRGDESC, C_PRGAUTH, C_PRGVER, C_PRGICON)
-  CALL g2_core.g2_init(ARG_VAL(1), "default")
+  CALL g2_core.g2_init(base.Application.getArgument(1), "default")
 
   OPEN FORM f FROM "fontAwesome"
   DISPLAY FORM f
-
-  DISPLAY "FGLIMAGEPATH:" || fgl_getEnv("FGLIMAGEPATH") TO fglimagepath
+	LET m_imgPath = fgl_getEnv("FGLIMAGEPATH")
+  DISPLAY "FGLIMAGEPATH:" || m_imgPath TO fglimagepath
   CALL load_arr()
 
   DIALOG ATTRIBUTE(UNBUFFERED)
@@ -73,56 +52,39 @@ MAIN
       ON ACTION applyfilter ATTRIBUTES(ACCELERATOR = 'RETURN')
         CALL load_arr3(l_filter)
     END INPUT
-    DISPLAY ARRAY m_rec2 TO arr.* ATTRIBUTES(FOCUSONFIELD)
+    DISPLAY ARRAY m_imgs TO arr.* ATTRIBUTES(FOCUSONFIELD)
       ON ACTION copy
         CALL ui.Interface.frontCall("standard", "cbSet", m_img, l_ret)
 
       BEFORE FIELD a01
-        CALL dsp_img(m_rec2[arr_curr()].i01, m_rec3[arr_curr()].v01, m_rec4[arr_curr()].f01)
+        CALL disp_img(m_imgs[arr_curr()].s01, m_icon[arr_curr()].s01, m_fntn[arr_curr()].s01)
       BEFORE FIELD a02
-        CALL dsp_img(m_rec2[arr_curr()].i02, m_rec3[arr_curr()].v02, m_rec4[arr_curr()].f02)
+        CALL disp_img(m_imgs[arr_curr()].s02, m_icon[arr_curr()].s02, m_fntn[arr_curr()].s02)
       BEFORE FIELD a03
-        CALL dsp_img(m_rec2[arr_curr()].i03, m_rec3[arr_curr()].v03, m_rec4[arr_curr()].f03)
+        CALL disp_img(m_imgs[arr_curr()].s03, m_icon[arr_curr()].s03, m_fntn[arr_curr()].s03)
       BEFORE FIELD a04
-        CALL dsp_img(m_rec2[arr_curr()].i04, m_rec3[arr_curr()].v04, m_rec4[arr_curr()].f04)
+        CALL disp_img(m_imgs[arr_curr()].s04, m_icon[arr_curr()].s04, m_fntn[arr_curr()].s04)
       BEFORE FIELD a05
-        CALL dsp_img(m_rec2[arr_curr()].i05, m_rec3[arr_curr()].v05, m_rec4[arr_curr()].f05)
+        CALL disp_img(m_imgs[arr_curr()].s05, m_icon[arr_curr()].s05, m_fntn[arr_curr()].s05)
       BEFORE FIELD a06
-        CALL dsp_img(m_rec2[arr_curr()].i06, m_rec3[arr_curr()].v06, m_rec4[arr_curr()].f06)
+        CALL disp_img(m_imgs[arr_curr()].s06, m_icon[arr_curr()].s06, m_fntn[arr_curr()].s06)
       BEFORE FIELD a07
-        CALL dsp_img(m_rec2[arr_curr()].i07, m_rec3[arr_curr()].v07, m_rec4[arr_curr()].f07)
+        CALL disp_img(m_imgs[arr_curr()].s07, m_icon[arr_curr()].s07, m_fntn[arr_curr()].s07)
       BEFORE FIELD a08
-        CALL dsp_img(m_rec2[arr_curr()].i08, m_rec3[arr_curr()].v08, m_rec4[arr_curr()].f08)
+        CALL disp_img(m_imgs[arr_curr()].s08, m_icon[arr_curr()].s08, m_fntn[arr_curr()].s08)
       BEFORE FIELD a09
-        CALL dsp_img(m_rec2[arr_curr()].i09, m_rec3[arr_curr()].v09, m_rec4[arr_curr()].f09)
+        CALL disp_img(m_imgs[arr_curr()].s09, m_icon[arr_curr()].s09, m_fntn[arr_curr()].s09)
       BEFORE FIELD a10
-        CALL dsp_img(m_rec2[arr_curr()].i10, m_rec3[arr_curr()].v10, m_rec4[arr_curr()].f10)
+        CALL disp_img(m_imgs[arr_curr()].s10, m_icon[arr_curr()].s10, m_fntn[arr_curr()].s10)
 
       BEFORE ROW
-        DISPLAY DIALOG.getCurrentItem() TO img_name
-        DISPLAY BY NAME m_rec2[arr_curr()].i01
-        DISPLAY BY NAME m_rec2[arr_curr()].i02
-        DISPLAY BY NAME m_rec2[arr_curr()].i03
-        DISPLAY BY NAME m_rec2[arr_curr()].i04
-        DISPLAY BY NAME m_rec2[arr_curr()].i05
-        DISPLAY BY NAME m_rec2[arr_curr()].i06
-        DISPLAY BY NAME m_rec2[arr_curr()].i07
-        DISPLAY BY NAME m_rec2[arr_curr()].i08
-        DISPLAY BY NAME m_rec2[arr_curr()].i09
-        DISPLAY BY NAME m_rec2[arr_curr()].i10
-
-        DISPLAY BY NAME m_rec3[arr_curr()].v01
-        DISPLAY BY NAME m_rec3[arr_curr()].v02
-        DISPLAY BY NAME m_rec3[arr_curr()].v03
-        DISPLAY BY NAME m_rec3[arr_curr()].v04
-        DISPLAY BY NAME m_rec3[arr_curr()].v05
-        DISPLAY BY NAME m_rec3[arr_curr()].v06
-        DISPLAY BY NAME m_rec3[arr_curr()].v07
-        DISPLAY BY NAME m_rec3[arr_curr()].v08
-        DISPLAY BY NAME m_rec3[arr_curr()].v09
-        DISPLAY BY NAME m_rec3[arr_curr()].v10
+				CALL disp_row(DIALOG)
 
     END DISPLAY
+		BEFORE DIALOG
+			CALL disp_row(DIALOG)
+      CALL disp_img(m_imgs[arr_curr()].s01, m_icon[arr_curr()].s01, m_fntn[arr_curr()].s01)
+
     ON ACTION clearfilter
       LET l_filter = NULL
       CALL load_arr3(l_filter)
@@ -136,7 +98,7 @@ MAIN
   END DIALOG
 END MAIN
 --------------------------------------------------------------------------------
-FUNCTION dsp_img(l_nam STRING, l_id STRING, l_font STRING)
+FUNCTION disp_img(l_nam STRING, l_id STRING, l_font STRING) RETURNS ()
   LET m_img = l_nam
   DISPLAY l_nam || " (" || l_id || ")" TO img_name
   DISPLAY l_font TO font_name
@@ -144,10 +106,37 @@ FUNCTION dsp_img(l_nam STRING, l_id STRING, l_font STRING)
   DISPLAY l_nam TO img2
 END FUNCTION
 --------------------------------------------------------------------------------
+FUNCTION disp_row(d ui.Dialog) RETURNS ()
+	DEFINE x SMALLINT
+	LET x = d.getCurrentRow("arr")
+	DISPLAY d.getCurrentItem() TO img_name
+	DISPLAY BY NAME m_imgs[x].s01
+	DISPLAY BY NAME m_imgs[x].s02
+	DISPLAY BY NAME m_imgs[x].s03
+	DISPLAY BY NAME m_imgs[x].s04
+	DISPLAY BY NAME m_imgs[x].s05
+	DISPLAY BY NAME m_imgs[x].s06
+	DISPLAY BY NAME m_imgs[x].s07
+	DISPLAY BY NAME m_imgs[x].s08
+	DISPLAY BY NAME m_imgs[x].s09
+	DISPLAY BY NAME m_imgs[x].s10
+
+	DISPLAY m_icon[x].s01 TO v01
+	DISPLAY m_icon[x].s02 TO v02
+	DISPLAY m_icon[x].s03 TO v03
+	DISPLAY m_icon[x].s04 TO v04
+	DISPLAY m_icon[x].s05 TO v05
+	DISPLAY m_icon[x].s06 TO v06
+	DISPLAY m_icon[x].s07 TO v07
+	DISPLAY m_icon[x].s08 TO v08
+	DISPLAY m_icon[x].s09 TO v09
+	DISPLAY m_icon[x].s10 TO v10
+END FUNCTION
+--------------------------------------------------------------------------------
 FUNCTION load_arr()
   DEFINE l_file STRING
   DEFINE l_st base.StringTokenizer
-  LET l_st = base.StringTokenizer.create(fgl_getEnv("FGLIMAGEPATH"), os.path.pathSeparator())
+  LET l_st = base.StringTokenizer.create(m_imgPath, os.Path.pathSeparator())
   WHILE l_st.hasMoreTokens()
     LET l_file = l_st.nextToken()
     IF l_file MATCHES "*.txt" THEN
@@ -158,19 +147,19 @@ END FUNCTION
 --------------------------------------------------------------------------------
 FUNCTION load_arr2(l_file)
   DEFINE l_file STRING
-  DEFINE c base.channel
+  DEFINE c base.Channel
   DEFINE l_rec RECORD
     fld1 STRING,
     fld2 STRING
   END RECORD
   DEFINE x SMALLINT
   DISPLAY "Adding:", l_file
-  LET c = base.channel.create()
+  LET c = base.Channel.create()
 --	CALL c.openFile( fgl_getEnv("FGLDIR")||"/lib/image2font.txt","r")
   CALL c.openFile(l_file, "r")
   CALL c.setDelimiter("=")
   CALL m_rec.clear()
-  WHILE NOT c.isEOF()
+  WHILE NOT c.isEof()
     IF c.read([l_rec.*]) THEN
       IF l_rec.fld1.getCharAt(1) = "#" THEN
         CONTINUE WHILE
@@ -192,9 +181,9 @@ END FUNCTION
 FUNCTION load_arr3(l_filter STRING)
   DEFINE x SMALLINT
   DEFINE l_rec DYNAMIC ARRAY OF t_rec
-  CALL m_rec2.clear()
-  CALL m_rec3.clear()
-  CALL m_rec4.clear()
+  CALL m_imgs.clear()
+  CALL m_icon.clear()
+  CALL m_fntn.clear()
   CALL m_rec.copyTo(l_rec)
   IF l_filter IS NOT NULL THEN
     FOR x = l_rec.getLength() TO 1 STEP -1
@@ -206,39 +195,38 @@ FUNCTION load_arr3(l_filter STRING)
   END IF
   MESSAGE SFMT("Loading array using filter: %1", l_filter)
   FOR x = 1 TO l_rec.getLength() STEP 10
-    CALL m_rec2.appendElement()
-    CALL m_rec3.appendElement()
-    CALL m_rec4.appendElement()
-    LET m_rec2[m_rec2.getLength()].i01 = l_rec[x].img
-    LET m_rec2[m_rec2.getLength()].i02 = l_rec[x + 1].img
-    LET m_rec2[m_rec2.getLength()].i03 = l_rec[x + 2].img
-    LET m_rec2[m_rec2.getLength()].i04 = l_rec[x + 3].img
-    LET m_rec2[m_rec2.getLength()].i05 = l_rec[x + 4].img
-    LET m_rec2[m_rec2.getLength()].i06 = l_rec[x + 5].img
-    LET m_rec2[m_rec2.getLength()].i07 = l_rec[x + 6].img
-    LET m_rec2[m_rec2.getLength()].i08 = l_rec[x + 7].img
-    LET m_rec2[m_rec2.getLength()].i09 = l_rec[x + 8].img
-    LET m_rec2[m_rec2.getLength()].i10 = l_rec[x + 9].img
-    LET m_rec3[m_rec3.getLength()].v01 = l_rec[x].val
-    LET m_rec3[m_rec3.getLength()].v02 = l_rec[x + 1].val
-    LET m_rec3[m_rec3.getLength()].v03 = l_rec[x + 2].val
-    LET m_rec3[m_rec3.getLength()].v04 = l_rec[x + 3].val
-    LET m_rec3[m_rec3.getLength()].v05 = l_rec[x + 4].val
-    LET m_rec3[m_rec3.getLength()].v06 = l_rec[x + 5].val
-    LET m_rec3[m_rec3.getLength()].v07 = l_rec[x + 6].val
-    LET m_rec3[m_rec3.getLength()].v08 = l_rec[x + 7].val
-    LET m_rec3[m_rec3.getLength()].v09 = l_rec[x + 8].val
-    LET m_rec3[m_rec3.getLength()].v10 = l_rec[x + 9].val
-    LET m_rec4[m_rec4.getLength()].f01 = l_rec[x].font
-    LET m_rec4[m_rec4.getLength()].f02 = l_rec[x + 1].font
-    LET m_rec4[m_rec4.getLength()].f03 = l_rec[x + 2].font
-    LET m_rec4[m_rec4.getLength()].f04 = l_rec[x + 3].font
-    LET m_rec4[m_rec4.getLength()].f05 = l_rec[x + 4].font
-    LET m_rec4[m_rec4.getLength()].f06 = l_rec[x + 5].font
-    LET m_rec4[m_rec4.getLength()].f07 = l_rec[x + 6].font
-    LET m_rec4[m_rec4.getLength()].f08 = l_rec[x + 7].font
-    LET m_rec4[m_rec4.getLength()].f09 = l_rec[x + 8].font
-    LET m_rec4[m_rec4.getLength()].f10 = l_rec[x + 9].font
+    CALL m_imgs.appendElement()
+    CALL m_icon.appendElement()
+    CALL m_fntn.appendElement()
+    LET m_imgs[m_imgs.getLength()].s01 = l_rec[x].img
+    LET m_imgs[m_imgs.getLength()].s02 = l_rec[x + 1].img
+    LET m_imgs[m_imgs.getLength()].s03 = l_rec[x + 2].img
+    LET m_imgs[m_imgs.getLength()].s04 = l_rec[x + 3].img
+    LET m_imgs[m_imgs.getLength()].s05 = l_rec[x + 4].img
+    LET m_imgs[m_imgs.getLength()].s06 = l_rec[x + 5].img
+    LET m_imgs[m_imgs.getLength()].s07 = l_rec[x + 6].img
+    LET m_imgs[m_imgs.getLength()].s08 = l_rec[x + 7].img
+    LET m_imgs[m_imgs.getLength()].s09 = l_rec[x + 8].img
+    LET m_imgs[m_imgs.getLength()].s10 = l_rec[x + 9].img
+    LET m_icon[m_icon.getLength()].s01 = l_rec[x].val
+    LET m_icon[m_icon.getLength()].s02 = l_rec[x + 1].val
+    LET m_icon[m_icon.getLength()].s03 = l_rec[x + 2].val
+    LET m_icon[m_icon.getLength()].s04 = l_rec[x + 3].val
+    LET m_icon[m_icon.getLength()].s05 = l_rec[x + 4].val
+    LET m_icon[m_icon.getLength()].s06 = l_rec[x + 5].val
+    LET m_icon[m_icon.getLength()].s07 = l_rec[x + 6].val
+    LET m_icon[m_icon.getLength()].s08 = l_rec[x + 7].val
+    LET m_icon[m_icon.getLength()].s09 = l_rec[x + 8].val
+    LET m_icon[m_icon.getLength()].s10 = l_rec[x + 9].val
+    LET m_fntn[m_fntn.getLength()].s01 = l_rec[x].font
+    LET m_fntn[m_fntn.getLength()].s02 = l_rec[x + 1].font
+    LET m_fntn[m_fntn.getLength()].s03 = l_rec[x + 2].font
+    LET m_fntn[m_fntn.getLength()].s04 = l_rec[x + 3].font
+    LET m_fntn[m_fntn.getLength()].s05 = l_rec[x + 4].font
+    LET m_fntn[m_fntn.getLength()].s06 = l_rec[x + 5].font
+    LET m_fntn[m_fntn.getLength()].s07 = l_rec[x + 6].font
+    LET m_fntn[m_fntn.getLength()].s08 = l_rec[x + 7].font
+    LET m_fntn[m_fntn.getLength()].s09 = l_rec[x + 8].font
+    LET m_fntn[m_fntn.getLength()].s10 = l_rec[x + 9].font
   END FOR
-
 END FUNCTION
