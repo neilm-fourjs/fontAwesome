@@ -14,11 +14,15 @@ On Linux you can use the makefile to build and run using the fontAwesome.4pw
 * Screenshot showing Google Material Design font ( using Genero V4.00 EAP version )
 ![Screenshot_20210329_153605](https://github.com/neilm-fourjs/fontAwesome/blob/master/screenshots/Screenshot_20210329_153605.png)
 
-# Building:
+# Building on Linux
 Set the Genero Environment then:
 ```
 git clone git@github.com:neilm-fourjs/g2_lib.git
+cd g2_lib
+git checkout g400
+cd ..
 git clone git@github.com:neilm-fourjs/fontAwesome.git
 cd fontAwesome/
+make
 make run
 ```
