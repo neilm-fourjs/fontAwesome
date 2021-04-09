@@ -1,4 +1,3 @@
-IMPORT util
 IMPORT os
 DEFINE m_pre, m_file, m_colr STRING
 DEFINE m_out base.channel

@@ -67,7 +67,7 @@
   </Settings>
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
-  <Group environment="value:FGLIMAGEPATH=$(ProjectDir)/etc/image2font2.txt:$(ProjectDir)/etc,value:FGLIMAGEPATHx=$(FGLDIR)/lib/image2font.txt,value:FGLRESOURCEPATH=../gl_lib/etc" id="883903980" label="fontAwesome" language="Genero" targetDirectory="$(ProjectDir)/../njm_app_bin">
+  <Group environment="value:I2F=gmdi,value:FGLIMAGEPATH=$(ProjectDir)/etc/$(I2F).txt:$(ProjectDir)/etc,value:FGLIMAGEPATHx=$(FGLDIR)/lib/image2font.txt,value:FGLRESOURCEPATH=../gl_lib/etc" id="883903980" label="fontAwesome" language="Genero" targetDirectory="$(ProjectDir)/../njm_app_bin">
     <Library binaryName="etc" id="1736128345" label="etc">
       <File filePath="etc/default.4st"/>
     </Library>

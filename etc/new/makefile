@@ -1,14 +1,18 @@
 # Automatic Makefile made by make4js by N.J.M.
 
-fgl_obj1 =  \
+fgl_obj2 =  \
 	 fa5.$(4GLOBJ)
+
+fgl_obj1 =  \
+	 gmdi.$(4GLOBJ)
 
 fgl_frm1 = 
 
 #depend::
 #	echo "making depends";  cd lib ; ./link_lib
 
-PRG1=fa5.42r
+PRG2=fa5.42r
+PRG1=gmdi.42r
 
 include ./Make_fjs.inc
 
