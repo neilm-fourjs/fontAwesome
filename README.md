@@ -5,6 +5,17 @@ This demo includes files for fontAwesome 5.0 and Google Material Design
 
 This demos also uses the g2_lib for the library code, so make sure to also check that out.
 
+# Font Awesome 4.7 ( Supplied with Genero )
+* https://fontawesome.com/v4.7.0/cheatsheet/
+
+# Font Awesome 5
+* https://fontawesome.com/icons?d=gallery&p=2&m=free
+* https://fontawesome.com/cheatsheet
+
+#Google Material Design:
+* https://fonts.google.com/icons?selected=Material+Icons
+* https://github.com/google/material-design-icons/tree/master/font
+
 
 On Linux you can use the makefile to build and run using the fontAwesome.4pw
 

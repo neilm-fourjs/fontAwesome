@@ -6,10 +6,14 @@ BASE=$(PWD)
 #export FGLIMAGEPATH=$(BASE)/etc:$(FGLDIR)/etc/image2font.txt
 
 # fontAwesome 5
-#export FGLIMAGEPATH=$(BASE)/etc:$(BASE)/etc/fa5.txt
+export FGLIMAGEPATH=$(BASE)/etc:$(BASE)/etc/fa5.txt
 
-# fontAwesome + Material Design
-export FGLIMAGEPATH=$(BASE)/etc:$(BASE)/etc/image2font2.txt
+# fontAwesome + Material Design Regular
+#export FGLIMAGEPATH=$(BASE)/etc:$(BASE)/etc/image2font2.txt
+
+# Material Design Web
+#export FGLIMAGEPATH=$(BASE)/etc:$(BASE)/etc/mdi.txt
+
 
 export FGLRESOURCEPATH=$(BASE)/etc
 export FGLLDPATH=$(TRG):$(GREDIR)/lib
