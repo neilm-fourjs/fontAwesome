@@ -15,7 +15,7 @@ MAIN
 
 	LET m_dir = os.path.join( "material-design-icons","font" )
 	CALL proc( "", "MaterialIcons-Regular", ".ttf" )
---	CALL proc( "tt-", "MaterialIconsTwoTone-Regular", ".otf" )
+	CALL proc( "tt-", "MaterialIconsTwoTone-Regular", ".woff2" )
 --	CALL proc( "r-", "MaterialIconsOutlined-Regular", ".otf" )
 	CALL m_out.close()
 END MAIN

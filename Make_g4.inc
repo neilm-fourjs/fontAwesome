@@ -21,7 +21,7 @@ g2_lib:
 	cd ../g2_lib && make
 
 $(BIN)/%.42m: $(SRC)/%.4gl
-	$(FGLCOMP) -c -o $(BIN) $<
+	$(FGLCOMP) -o $(BIN) $<
 
 $(BIN)/%.42f: $(SRC)/%.per
 	$(FGLFORM) -M $< && mv $(SRC)/*.42f $(BIN)

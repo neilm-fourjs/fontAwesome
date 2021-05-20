@@ -93,8 +93,8 @@
 	<Style name="Table.disparr">
 		<StyleAttribute name="summaryLineAlwaysAtBottom" value="no" />
 	</Style>
-  <Style name="Table.disparr:odd">
-    <StyleAttribute name="backgroundColor" value="#D5FFD5"/>
+  <Style name="Table:even">
+    <StyleAttribute name="backgroundColor" value="systemAlternateBackground" />
   </Style>
 
 	<Style name="Window">

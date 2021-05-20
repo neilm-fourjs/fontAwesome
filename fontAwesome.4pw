@@ -65,13 +65,28 @@
       <NodeInfo mimeType="pm/package" properties="packageId;packageLabel;packageVersion;mainModule;packageVersionName;resources;launchScreen;launchScreen1136x640;launchScreen750x1334;launchScreen1334x750;launchScreen1242x2208;launchScreen2208x1242;launchScreen1125x2436;launchScreen2436x1125;launchScreen768x1024;launchScreen1024x768;launchScreen1536x2048;launchScreen2048x1536;launchScreen2224x1668;launchScreen1668x2224;launchScreen2048x2732;launchScreen2732x2048;launchScreenXib;icon29x29;icon40x40;icon58x58;icon60x60;icon76x76;icon80x80;icon87x87;icon120x120;icon152x152;icon167x167;icon180x180;icon1024x1024;gma-primary-color;gma-primary-dark-color;gma-accent-color;gma-actionbar-color;gma-primaryText-color;gma-windowBackground-color;gma-navigationBarBackground-color;icon-ldpi;icon-mdpi;icon-hdpi;icon-xhdpi;icon-xxhdpi;status-icon-mdpi;status-icon-hdpi;status-icon-xhdpi;permissions;required;gma-cordova;gmi-cordova"/>
     </NodeInfos>
   </Settings>
-  <LanguageList version="1.0"/>
+  <LanguageList version="1.0">
+    <Language name="Genero ( NJM no link )">
+      <BuildRuleList/>
+      <LinkRuleList>
+        <LinkRule commands="$(echo) -n &quot;$(BuildInputFilePaths:.4gl)&quot; &quot;$(IntermediateFilePaths:.4gl)&quot; &gt; &quot;$(TargetDir)/$(BinaryName)_lst.txt&quot;;$(fglcomp) -Wall --output-dir $(TargetDir) --make @&quot;$(TargetDir)/$(BinaryName)_lst.txt&quot;;tclsh &quot;$(GSTSETUPDIR)/tpl/build-rdd.tcl&quot; &quot;$(IntermediateFilePaths:.rdd)&quot;;$(delete) &quot;$(TargetDir)/$(BinaryName)_lst.txt&quot;" dependencies="$(BuildOutputFilePaths:.42m);$(LibDependencies:.42m);$(ExternalDependencies:.42m)" nodeType="Application" outputFiles=""/>
+        <LinkRule commands="$(echo) -n &quot;$(BuildInputFilePaths:.4gl)&quot; &quot;$(IntermediateFilePaths:.4gl)&quot; &gt; &quot;$(TargetDir)/$(BinaryName)_lst.txt&quot;;$(fglcomp) -Wall --output-dir $(TargetDir) --make @&quot;$(TargetDir)/$(BinaryName)_lst.txt&quot;;tclsh &quot;$(GSTSETUPDIR)/tpl/build-rdd.tcl&quot; &quot;$(IntermediateFilePaths:.rdd)&quot;;$(delete) &quot;$(TargetDir)/$(BinaryName)_lst.txt&quot;" dependencies="$(BuildOutputFilePaths:.42m);$(LibDependencies:.42m);$(ExternalDependencies:.42m)" nodeType="Library" outputFiles=""/>
+      </LinkRuleList>
+      <ExecutionRule>
+        <Run commands=""/>
+        <Debug commands=""/>
+        <Profile commands=""/>
+        <Trace commands=""/>
+      </ExecutionRule>
+      <VariableList/>
+    </Language>
+  </LanguageList>
   <PlatformList version="1.0"/>
-  <Group environment="value:I2F=gmdi,value:FGLIMAGEPATH=$(ProjectDir)/etc/$(I2F).txt:$(ProjectDir)/etc,value:FGLIMAGEPATHx=$(FGLDIR)/lib/image2font.txt,value:FGLRESOURCEPATH=../gl_lib/etc" id="883903980" label="fontAwesome" language="Genero" targetDirectory="$(ProjectDir)/../njm_app_bin">
+  <Group environment="value:I2F=gmdi,value:FGLIMAGEPATH=$(ProjectDir)/etc/$(I2F).txt:$(ProjectDir)/etc,value:FGLIMAGEPATHx=$(FGLDIR)/lib/image2font.txt,value:FGLRESOURCEPATH=../gl_lib/etc" id="883903980" label="fontAwesome" language="Genero ( NJM no link )" targetDirectory="$(ProjectDir)/../njm_app_bin">
     <Library binaryName="etc" id="1736128345" label="etc">
       <File filePath="etc/default.4st"/>
     </Library>
-    <Application binaryName="fontAwesome" dependencies="14000,1986,-1692104760_875802101,-1752614414_14000,1736128345" id="18736" label="fontAwesome">
+    <Application binaryName="fontAwesome" cwd="$(ProjectDir)" dependencies="14000,1986,-1692104760_875802101,-1752614414_14000,1736128345" id="18736" label="fontAwesome" language="Genero ( NJM no link )">
       <Configuration id="-275414318" label="fontAwesome"/>
       <File filePath="src/fontAwesome.4gl"/>
       <File filePath="src/fontAwesome.per"/>

@@ -37,9 +37,8 @@ DEFINE m_img STRING
 MAIN
   DEFINE l_ret SMALLINT
   DEFINE l_filter STRING
-  DEFINE l_appInfo g2_appInfo.appInfo
 
-  CALL l_appInfo.progInfo(C_PRGDESC, C_PRGAUTH, C_PRGVER, C_PRGICON)
+  CALL g2_core.m_appInfo.progInfo(C_PRGDESC, C_PRGAUTH, C_PRGVER, C_PRGICON)
   CALL g2_core.g2_init(base.Application.getArgument(1), "default")
 
   OPEN FORM f FROM "fontAwesome"
@@ -93,7 +92,7 @@ MAIN
       CALL load_arr3(l_filter)
       NEXT FIELD l_filter
     ON ACTION about
-      CALL g2_about.g2_about(l_appInfo)
+      CALL g2_about.g2_about(g2_core.m_appInfo)
     ON ACTION quit
       EXIT DIALOG
     ON ACTION close
