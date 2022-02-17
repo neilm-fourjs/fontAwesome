@@ -30,7 +30,7 @@ END -- VBOX
 GRID
 {
 [quit :copy             :about ]
-[flab:font_name             ]
+[flab:font_name                ]
 <G clab                         >
  [nlab:img_name              ]
  [ii:img                     ]
@@ -88,7 +88,7 @@ GROUP clab : clab, TEXT=%"Current Icon:";
 LABEL nlab : nlab, TEXT=%"Icon:";
 LABEL img_name = FORMONLY.img_name, SIZEPOLICY=DYNAMIC, STYLE="em14";
 LABEL flab : flab, TEXT=%"Font File:";
-LABEL font_name = FORMONLY.font_name, SIZEPOLICY=FIXED, STYLE="em14";
+LABEL font_name = FORMONLY.font_name, SIZEPOLICY=DYNAMIC, STYLE="em14";
 
 IMAGE ii = FORMONLY.img2, STYLE="noborder", SIZEPOLICY=DYNAMIC;
 IMAGE img = FORMONLY.img, STRETCH=BOTH, AUTOSCALE, {HEIGHT=150 PIXELS, WIDTH=150 PIXELS,} STYLE="noborder";
